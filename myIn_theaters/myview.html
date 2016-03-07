@@ -1,0 +1,64 @@
+<div class="container">
+  <h2 class="page-header">{{title}}</h2>
+  <h2 ng-if="message">{{message}}</h2>
+  <div class="list-group">
+    <a href="#/subject/{{item.id}}" ng-repeat="item in subjects" href="#" class="list-group-item col-sm-12 col-md-6">
+      <span class="badge">{{item.rating.average}}</span>
+      <div class="media">
+        <div class="media-left">
+          <!-- 绑定图片 -->
+          <img class="media-object" ng-src="{{item.images.medium}}" alt="{{item.title}}">
+        </div>
+        <div class="media-body">
+          <h3 class="media-heading">{{item.title}}</h3>
+          <p>导演：
+            <span ng-repeat="d in item.directors">{{d.name}}
+            <span ng-if="!$last">、</span>
+            </span>
+          </p>
+          <p>
+            主演：
+            <span ng-repeat="c in item.casts">
+            {{c.name}}{{$last?'':'、'}}
+            <!-- <span ng-if="!$last">、</span> -->
+            </span>
+          </p>
+          <p>类型{{item.genres.join('、')}}</p>
+        </div>
+      </div>
+      <button type="button" class="btn btn-info buyBtn">买票</button>
+    </a>
+  </div>
+  <div ng-if="!loading">
+    <ul class="pagination">
+      <!-- 这里需要去除a标签的默认行为 -->
+      <li ng-class="{disabled:current<=1}" ng-click="go(current-1)">
+        <a aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li ng-repeat="liEle in liEles" ng-class="{active:liEle.num=={{current}}}" ng-click="go(liEle.num)"><a>{{liEle.num}}</a></li>
+      <li ng-class="{disabled:current>=totalPages}" ng-click="go(current+1)">
+        <a aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+    <div>共{{totalCount}}条记录，第{{current}}页/{{totalPages}}页</div>
+  </div>
+</div>
+<!-- loading内容 -->
+<!--pulse wave-->
+<!-- 当有数据传入时，不显示loading -->
+<div id="mask" ng-if="loading">
+  <!--colorful pulse-->
+  <div id="colorfulPulse">
+    <span class="item-1"></span>
+    <span class="item-2"></span>
+    <span class="item-3"></span>
+    <span class="item-4"></span>
+    <span class="item-5"></span>
+    <span class="item-6"></span>
+    <span class="item-7"></span>
+  </div>
+</div>

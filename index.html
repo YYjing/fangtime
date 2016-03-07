@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="moviecat">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>我的电影王国</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+  <!-- 顶部搜索栏 -->
+  <nav class="navbar navbar-inverse navbar-fixed-top" id="myMovieNav">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#my_movieNav" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- <a class="navbar-brand">北京</a> -->
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="my_movieNav">
+        <ul class="nav navbar-nav nav-topBar">
+          <li auto_focus><a href="#/in_theaters/1">正在热映</a></li>
+          <li auto_focus><a href="#/coming_soon/1">即将上映</a></li>
+          <li auto_focus><a href="#/top250/1">票房榜</a></li>
+        </ul>
+        <form class="navbar-form navbar-right" ng-controller="searchCtrl" ng-submit="update()">
+          <input type="text" class="form-control" placeholder="搜搜..." ng-model="inputSearch">
+          <button type="submit" class="btn btn-default" ng-click="update()">查询</button>
+        </form>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+  <!-- 侧边悬浮侧边导航 -->
+  <div class="box visible-lg">
+    <div><a href='#'><span>1</span>菜单导航</a></div>
+    <div auto_focus><a href='#/in_theaters/1'><span>2</span>正在热映</a></div>
+    <div auto_focus><a href='#/coming_soon/1'><span>3</span>即将上映</a></div>
+    <div auto_focus><a href='#/top250/1'><span>4</span>票房榜</a></div>
+    <div><a href='#'><span>5</span>在线客服</a></div>
+    <div><a href='#'><span>6</span>关注我们</a></div>
+    <div><a href='#'><span>7</span>返回顶部</a></div>
+  </div>
+  <!-- 放置电影列表模板 -->
+  <!-- <div class="container"> -->
+  <div class="main" ng-view></div>
+  <!--  </div> -->
+  <!-- <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" ng-view></div> -->
+  <!-- 引包 -->
+  <script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/angular-route/1.3.13/angular-route.js"></script>
+  <!-- 主模块 -->
+  <script src="js/myapp.js "></script>
+  <!-- 主要子模块 -->
+  <script src="moviedetail/mydetailctrl.js "></script>
+  <script src="myIn_theaters/mycontroller.js "></script>
+  <script src="myIn_theaters/myhttp.js "></script>
+  <script src="myIn_theaters/myauto_focus.js "></script>
+  <script type="text/javascript">
+  $(function() {
+    var timer = null;
+    $(".box").hover(function() {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        $(".box").find("a").each(function(index, el) {
+          /*alert(index);*/
+          setTimeout(function() {
+            $(el).stop().animate({
+              "right": 0
+            }, 300);
+          }, 50 * index);
+        })
+      }, 200)
+    }, function() {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      $(this).find("a").each(function(index, el) {
+        setTimeout(function() {
+          $(el).stop().animate({
+            "right": -110
+          }, 300)
+        }, 50 * index);
+      })
+    })
+  })
+  </script>
+</body>
+
+</html>

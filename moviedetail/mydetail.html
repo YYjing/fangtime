@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="jumbotron text-center">
+    <div ng-if="loading">幺妹正在拼命查询中....</div>
+    <h1>{{movie.title}}</h1>
+    <img ng-src="{{movie.images.large}}" alt="{{movie.title}}">
+    <p>{{movie.summary}}</p>
+  </div>
+  <!-- 当有数据传入时，不显示loading -->
+  <div id="mask" ng-if="loading">
+    <!--colorful pulse-->
+    <div id="colorfulPulse">
+      <span class="item-1"></span>
+      <span class="item-2"></span>
+      <span class="item-3"></span>
+      <span class="item-4"></span>
+      <span class="item-5"></span>
+      <span class="item-6"></span>
+      <span class="item-7"></span>
+    </div>
+  </div>
+</div>
